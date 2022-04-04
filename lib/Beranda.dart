@@ -1,5 +1,3 @@
-// import 'dart:js';
-
 import 'package:flutter/material.dart';
 
 class Beranda extends StatefulWidget {
@@ -17,6 +15,14 @@ class _HomePageState extends State<Beranda> {
   void onTap(int index) {
     setState(() {
       selectedIndex = index;
+    });
+  }
+
+  String dropdownvalue = 'Pilih Program Studi';
+
+  void onDrop(String? newValue) {
+    setState(() {
+      dropdownvalue = newValue!;
     });
   }
 
@@ -100,6 +106,16 @@ class Home extends StatelessWidget {
 class DaftarUjian extends StatelessWidget {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  String dropValue = 'Informatika';
+
+  var items = [
+    'Informatika',
+    'Sistem Informasi',
+    'Sistem Informasi Akuntansi',
+    'Bisnis Digital',
+    'Manajemen Ritel',
+    'Teknik Komputer'
+  ];
 
   void validateInput() {
     FormState? form = this.formKey.currentState;
@@ -182,21 +198,22 @@ class DaftarUjian extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10.0),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Masukan Program Studi',
-                      labelText: 'Program Studi',
-                      icon: Icon(Icons.school),
-                      border: OutlineInputBorder(),
-                    ),
-                    keyboardType: TextInputType.text,
-                    validator: (String? value) {
-                      if (value.toString().isEmpty) {
-                        return 'Program Studi Tidak Boleh Kosong';
-                      }
-                    },
+                  child: Column(
+                    children: [
+                      DropdownButton(
+                          value: dropValue,
+                          icon: const Icon(Icons.school),
+                          items: items.map((String items) {
+                            return DropdownMenuItem(
+                              value: items,
+                              child: Text(items),
+                            );
+                          }).toList(),
+                          onChanged: (String? value) {}),
+                    ],
                   ),
                 ),
+                // ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10.0),
                   child: TextFormField(
