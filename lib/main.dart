@@ -24,6 +24,22 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  void validateInput() {
+    FormState? form = this.formKey.currentState;
+
+    SnackBar message = SnackBar(
+      content: Text('Proses validasi sukses...'),
+    );
+
+    if (form != null) {
+      if (form.validate()) {
+        // ScaffoldMessenger.of(context).showSnackBar(message);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +48,7 @@ class _LoginState extends State<Login> {
         title: Text('Pendaftaran Ujian'),
         backgroundColor: Colors.blue[900],
       ),
-      body: Container(
+      body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             Padding(
@@ -72,13 +88,13 @@ class _LoginState extends State<Login> {
               ),
             ),
             Container(
-              // tombol login
+              //Tombol Login
               height: 50,
               width: 250,
               child: ElevatedButton(
                 onPressed: () {
-                  // Navigasi ketika tombol login di klik
                   Navigator.push(
+                      // Navigasi ketika tombol login di klik
                       context,
                       MaterialPageRoute(
                           builder: (_) =>
