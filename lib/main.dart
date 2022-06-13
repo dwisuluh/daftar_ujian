@@ -1,27 +1,48 @@
 import 'package:flutter/material.dart';
-import 'Beranda.dart'; // import file beranda.dart supaya bisa dipanggil
+import 'package:firebase_core/firebase_core.dart';
+import 'home.dart';
+import 'login.dart';
+import 'register.dart';
 
-void main() {
-  runApp(const MyApp());
+// void main() {
+//   runApp(const MyApp());
+// }
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Login(),
+      initialRoute: 'login',
+      routes: {
+        'login': (context) => Login(),
+        'register': (context) => Register(),
+        // 'home': (context) => HomePage(),
+      },
     );
   }
+  // const MyApp({Key? key}) : super(key: key);
+
+  // // This widget is the root of your application.
+  // @override
+  // Widget build(BuildContext context) {
+  //   return MaterialApp(
+  //     debugShowCheckedModeBanner: false,
+  //     home: Login(),
+  //   );
+  // }
 }
 
-class Login extends StatefulWidget {
-  @override
-  _LoginState createState() => _LoginState();
-}
+// class Login extends StatefulWidget {
+//   @override
+//   _LoginState createState() => _LoginState();
+// }
 
 class _LoginState extends State<Login> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1001459572576",
+    "project_id": "pendaftaran-ujian-88943",
+    "storage_bucket": "pendaftaran-ujian-88943.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1001459572576:android:79a25cb9ddb041cf310805",
+        "android_client_info": {
+          "package_name": "com.example.pendaftaran_ujian"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1001459572576-kl3cvrcf4kvqmi9fg956sn57n9r5ick1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEx4SB2MRiURzfDwXLestaxMAWkb5CzXo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1001459572576-kl3cvrcf4kvqmi9fg956sn57n9r5ick1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
