@@ -90,7 +90,7 @@ class _Home extends State<Home> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            'Press the button to download the Weather forecast',
+            'Tekan Tombol untuk cek Cuaca',
           ),
         ],
       ),
@@ -108,7 +108,7 @@ class _Home extends State<Home> {
     print(cityName);
   }
 
-  Widget _coordinateInputs() {
+  Widget _cityName() {
     return Row(
       children: <Widget>[
         Expanded(
@@ -116,7 +116,8 @@ class _Home extends State<Home> {
               margin: EdgeInsets.all(5),
               child: TextField(
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(), hintText: 'Enter latitude'),
+                      border: OutlineInputBorder(),
+                      hintText: 'Enter City Name'),
                   keyboardType: TextInputType.text,
                   onChanged: _saveLat,
                   onSubmitted: _saveLat)),
@@ -207,7 +208,7 @@ class _Home extends State<Home> {
               ],
             ),
           ),
-          _coordinateInputs(),
+          _cityName(),
           _buttons(),
           Text(
             "Output : ",
