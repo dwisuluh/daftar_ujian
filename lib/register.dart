@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'login.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -94,7 +95,7 @@ class _RegistrationState extends State<Register> {
                         setState(() {
                           showSpinner = true;
                         });
-                        Navigator.pushNamed(context, 'login');
+                        Navigator.pop(context);
                       },
                       style:
                           ElevatedButton.styleFrom(primary: Colors.redAccent),

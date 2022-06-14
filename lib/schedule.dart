@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-//Class home ketika navigasi home di klik
-class Home extends StatelessWidget {
+//class ketika tombol jadwal di klik
+class Jadwal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dashboard'),
+        title: Text('Jadwal Ujian'),
         backgroundColor: Colors.blue[900],
         leading: IconButton(
           onPressed: () {},
-          icon: Icon(Icons.home),
+          icon: Icon(Icons.calendar_month_outlined),
         ),
         actions: [
           IconButton(
@@ -26,6 +26,7 @@ class Home extends StatelessWidget {
           ),
         ],
       ),
+      // drawer: buildDrawer(context),
       body: Card(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -36,36 +37,10 @@ class Home extends StatelessWidget {
               title: Text('Dwi Suluh Pribadi'),
               subtitle: Text('195411132'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                TextButton(
-                  child: const Text('DETAIL'),
-                  onPressed: () {
-                    action(context);
-                  },
-                ),
-                const SizedBox(width: 8),
-              ],
-            ),
+            const Text('saat ini jadwal ujian anda belum ada.')
           ],
         ),
       ),
     );
-  }
-
-//alert ketika tombol detail di klik
-  void action(BuildContext context) {
-    var alertDialog = AlertDialog(
-      title: Text('Status Pengajuan Jadwal'),
-      content: Text(
-          'Saudara belum mengajukan jadwal ujian, silahkan klik daftar ujian.'),
-    );
-
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return alertDialog;
-        });
   }
 }

@@ -1,13 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'home.dart';
+import 'homePage.dart';
 import 'login.dart';
 import 'register.dart';
-
-// void main() {
-//   runApp(const MyApp());
-// }
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,100 +22,6 @@ class MyApp extends StatelessWidget {
         'register': (context) => Register(),
         'home': (context) => HomePage(),
       },
-    );
-  }
-}
-
-void signOut() {
-  FirebaseAuth.instance.signOut();
-}
-
-class _LoginState extends State<Login> {
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  // void validateInput() {
-  //   FormState? form = this.formKey.currentState;
-
-  //   SnackBar message = SnackBar(
-  //     content: Text('Proses validasi sukses...'),
-  //   );
-
-  //   if (form != null) {
-  //     if (form.validate()) {
-  //       // ScaffoldMessenger.of(context).showSnackBar(message);
-  //     }
-  //   }
-  // }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text('Pendaftaran Ujian'),
-        backgroundColor: Colors.blue[900],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top: 60.0),
-              child: Center(
-                  child: Container(
-                width: 240,
-                height: 240,
-                child: Image.asset('asset/images/UTDI-logo.png'),
-              )),
-            ),
-            Padding(
-              // field inputan email
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: TextFormField(
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Email',
-                      hintText: 'Masukan Email students'),
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (String? value) {
-                    if (value.toString().isEmpty) {
-                      return 'Email tidak boleh kosong';
-                    }
-                  }),
-            ),
-            const Padding(
-              // field inputan password
-              padding: EdgeInsets.only(
-                  left: 15.0, right: 15.0, top: 15.0, bottom: 15.0),
-              child: TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Password',
-                    hintText: 'Enter secure password'),
-              ),
-            ),
-            Container(
-              //Tombol Login
-              height: 50,
-              width: 250,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      // Navigasi ketika tombol login di klik
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) =>
-                              HomePage())); // routing ke halaman beranda atau ke file beranda
-                },
-                child: Text(
-                  'Login',
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
