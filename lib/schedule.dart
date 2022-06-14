@@ -3,7 +3,7 @@ import 'login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 //class ketika tombol jadwal di klik
-class Jadwal extends StatelessWidget {
+class Akun extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

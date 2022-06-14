@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'Home.dart';
 import 'testRegistration.dart';
 import 'schedule.dart';
+import 'ToList.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   //List navigasi
-  final pages = [Home(), DaftarUjian(), Jadwal()];
+  final pages = [Home(), DaftarUjian(), Catatan(), Akun()];
 
   int selectedIndex = 0;
 
@@ -33,8 +34,9 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
               icon: Icon(Icons.app_registration_outlined),
               label: 'Daftar Ujian'),
+          BottomNavigationBarItem(icon: Icon(Icons.list_alt), label: 'Catatan'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.schedule), label: 'Jadwal Ujian'),
+              icon: Icon(Icons.verified_user), label: 'Account'),
         ],
         currentIndex: selectedIndex,
         type: BottomNavigationBarType.fixed,

@@ -27,6 +27,7 @@ class Home extends StatelessWidget {
         ],
       ),
       body: Card(
+        margin: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
