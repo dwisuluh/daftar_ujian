@@ -23,43 +23,28 @@ class MyApp extends StatelessWidget {
       routes: {
         'login': (context) => Login(),
         'register': (context) => Register(),
-        // 'home': (context) => HomePage(),
+        'home': (context) => HomePage(),
       },
     );
   }
-  // const MyApp({Key? key}) : super(key: key);
-
-  // // This widget is the root of your application.
-  // @override
-  // Widget build(BuildContext context) {
-  //   return MaterialApp(
-  //     debugShowCheckedModeBanner: false,
-  //     home: Login(),
-  //   );
-  // }
 }
-
-// class Login extends StatefulWidget {
-//   @override
-//   _LoginState createState() => _LoginState();
-// }
 
 class _LoginState extends State<Login> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  void validateInput() {
-    FormState? form = this.formKey.currentState;
+  // void validateInput() {
+  //   FormState? form = this.formKey.currentState;
 
-    SnackBar message = SnackBar(
-      content: Text('Proses validasi sukses...'),
-    );
+  //   SnackBar message = SnackBar(
+  //     content: Text('Proses validasi sukses...'),
+  //   );
 
-    if (form != null) {
-      if (form.validate()) {
-        // ScaffoldMessenger.of(context).showSnackBar(message);
-      }
-    }
-  }
+  //   if (form != null) {
+  //     if (form.validate()) {
+  //       // ScaffoldMessenger.of(context).showSnackBar(message);
+  //     }
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +104,7 @@ class _LoginState extends State<Login> {
                       context,
                       MaterialPageRoute(
                           builder: (_) =>
-                              Beranda())); // routing ke halaman beranda atau ke file beranda
+                              HomePage())); // routing ke halaman beranda atau ke file beranda
                 },
                 child: Text(
                   'Login',

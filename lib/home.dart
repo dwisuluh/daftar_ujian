@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class Beranda extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<Beranda> {
+class _HomePageState extends State<HomePage> {
   //List navigasi
   final pages = [Home(), DaftarUjian(), Jadwal()];
 
@@ -15,14 +17,6 @@ class _HomePageState extends State<Beranda> {
   void onTap(int index) {
     setState(() {
       selectedIndex = index;
-    });
-  }
-
-  String dropdownvalue = 'Pilih Program Studi';
-
-  void onDrop(String? newValue) {
-    setState(() {
-      dropdownvalue = newValue!;
     });
   }
 
@@ -48,6 +42,56 @@ class _HomePageState extends State<Beranda> {
   }
 }
 
+Widget buildDrawer(BuildContext context) {
+  final _auth = FirebaseAuth.instance;
+  _signOut() async {
+    await _auth.signOut();
+  }
+
+  return Drawer(
+    child: ListView(
+      children: <Widget>[
+        ListTile(
+          title: Text('Home'),
+          leading: Icon(Icons.home),
+          onTap: () {
+            Navigator.pushNamed(context, '/');
+          },
+        ),
+        Divider(),
+        ListTile(
+          title: Text('List'),
+          leading: Icon(Icons.list),
+          onTap: () {
+            Navigator.pushNamed(context, '/');
+          },
+        ),
+        Divider(),
+        ListTile(
+          title: Text('Weather'),
+          leading: Icon(Icons.sunny),
+          onTap: () {
+            Navigator.pushNamed(context, 'Login');
+          },
+        ),
+        Divider(),
+        ListTile(
+          title: Text('Logout'),
+          leading: Icon(Icons.exit_to_app),
+          onTap: () async {
+            await _signOut();
+            if (_auth.currentUser == null) {
+              Navigator.pop(
+                  context, MaterialPageRoute(builder: (context) => Login()));
+            }
+          },
+        ),
+        Divider(),
+      ],
+    ),
+  );
+}
+
 //Class home ketika navigasi home di klik
 class Home extends StatelessWidget {
   @override
@@ -57,6 +101,7 @@ class Home extends StatelessWidget {
         title: Text('Dashboard'),
         backgroundColor: Colors.blue[900],
       ),
+      drawer: buildDrawer(context),
       // pembuatan card view
       body: Card(
         child: Column(
@@ -138,6 +183,7 @@ class DaftarUjian extends StatelessWidget {
           title: Text('Daftar Ujian'),
           backgroundColor: Colors.blue[900],
         ),
+        drawer: buildDrawer(context),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(15.0),
           child: Form(
@@ -253,6 +299,7 @@ class Jadwal extends StatelessWidget {
         title: Text('Jadwal Ujian'),
         backgroundColor: Colors.blue[900],
       ),
+      drawer: buildDrawer(context),
       body: Card(
         child: Column(
           mainAxisSize: MainAxisSize.min,

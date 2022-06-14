@@ -22,6 +22,7 @@ class _LoginState extends State<Login> {
       appBar: AppBar(
         title: Text('Pendaftaran Ujian'),
         backgroundColor: Colors.blue[900],
+        automaticallyImplyLeading: false,
       ),
       body: ModalProgressHUD(
         inAsyncCall: showSpinner,
