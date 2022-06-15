@@ -160,6 +160,7 @@ class _Home extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    String? name = FirebaseAuth.instance.currentUser!.displayName.toString();
     return Scaffold(
       appBar: AppBar(
         title: Text('Dashboard'),
@@ -208,8 +209,10 @@ class _Home extends State<Home> {
               ],
             ),
           ),
-          _cityName(),
-          _buttons(),
+          Card(
+            margin: EdgeInsets.symmetric(horizontal: 20.0),
+            child: Column(children: [_cityName(), _buttons()]),
+          ),
           Text(
             "Output : ",
             style: TextStyle(fontSize: 18),

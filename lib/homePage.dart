@@ -4,7 +4,7 @@ import 'login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'Home.dart';
 import 'testRegistration.dart';
-import 'schedule.dart';
+import 'account.dart';
 import 'ToList.dart';
 
 class HomePage extends StatefulWidget {

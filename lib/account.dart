@@ -3,16 +3,21 @@ import 'login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 //class ketika tombol jadwal di klik
-class Akun extends StatelessWidget {
+class Akun extends StatefulWidget {
+  @override
+  _AkunState createState() => _AkunState();
+}
+
+class _AkunState extends State<Akun> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Jadwal Ujian'),
+        title: Text('Account'),
         backgroundColor: Colors.blue[900],
         leading: IconButton(
           onPressed: () {},
-          icon: Icon(Icons.calendar_month_outlined),
+          icon: Icon(Icons.supervised_user_circle_outlined),
         ),
         actions: [
           IconButton(

@@ -11,7 +11,7 @@ class Catatan extends StatefulWidget {
 
 class _Tolist extends State<Catatan> {
 // text fields' controllers
-  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
   final TextEditingController _dateController = TextEditingController();
   final TextEditingController _deskripsiController = TextEditingController();
   final String uid = FirebaseAuth.instance.currentUser!.uid;
@@ -23,7 +23,7 @@ class _Tolist extends State<Catatan> {
     String action = 'create';
     if (documentSnapshot != null) {
       action = 'update';
-      _nameController.text = documentSnapshot['name'];
+      _titleController.text = documentSnapshot['title'];
       _deskripsiController.text = documentSnapshot['deskription'];
       _dateController.text = documentSnapshot['date'].toString();
     }
@@ -44,8 +44,8 @@ class _Tolist extends State<Catatan> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextField(
-                  controller: _nameController,
-                  decoration: const InputDecoration(labelText: 'Name'),
+                  controller: _titleController,
+                  decoration: const InputDecoration(labelText: 'Title'),
                 ),
                 TextField(
                   keyboardType:
@@ -66,16 +66,18 @@ class _Tolist extends State<Catatan> {
                 ElevatedButton(
                   child: Text(action == 'create' ? 'Create' : 'Update'),
                   onPressed: () async {
-                    final String? name = _nameController.text;
+                    final String? title = _titleController.text;
                     final String? deskription = _deskripsiController.text;
                     final String? date = _dateController.text;
-                    if (name != null && deskription != null) {
+                    if (title != null && deskription != null) {
                       if (action == 'create') {
                         // Persist a new product to Firestore
                         await _documentation.add({
-                          "name": name,
+                          "title": title,
                           "date": date,
                           "deskripsi": deskription,
+                          "name":
+                              FirebaseAuth.instance.currentUser!.displayName,
                           "userId": FirebaseAuth.instance.currentUser!.uid
                         });
                       }
@@ -83,7 +85,7 @@ class _Tolist extends State<Catatan> {
                       if (action == 'update') {
                         // Update the product
                         await _documentation.doc(documentSnapshot!.id).update({
-                          "name": name,
+                          "title": title,
                           "date": date,
                           "deskripsi": deskription,
                           // "userId": FirebaseAuth.instance.currentUser!.uid
@@ -91,7 +93,7 @@ class _Tolist extends State<Catatan> {
                       }
 
                       // Clear the text fields
-                      _nameController.text = '';
+                      _titleController.text = '';
                       _deskripsiController.text = '';
                       _dateController.text = '';
 
@@ -150,7 +152,7 @@ class _Tolist extends State<Catatan> {
                   return Card(
                     margin: const EdgeInsets.all(10),
                     child: ListTile(
-                      title: Text(documentSnapshot['name'] +
+                      title: Text(documentSnapshot['title'] +
                           '\n' +
                           documentSnapshot['date'].toString()),
                       subtitle: Text(documentSnapshot['deskripsi']),
