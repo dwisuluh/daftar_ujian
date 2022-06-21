@@ -45,15 +45,21 @@ class _Tolist extends State<Catatan> {
               children: [
                 TextField(
                   controller: _titleController,
-                  decoration: const InputDecoration(labelText: 'Title'),
+                  decoration: const InputDecoration(
+                      labelText: 'Title',
+                      // border: OutlineInputBorder(),
+                      hintText: 'Masukan Judul',
+                      contentPadding: EdgeInsets.symmetric(vertical: 15.0)),
                 ),
                 TextField(
-                  keyboardType:
-                      const TextInputType.numberWithOptions(decimal: false),
+                  keyboardType: TextInputType.datetime,
+                  // const TextInputType.numberWithOptions(decimal: false),
                   controller: _dateController,
                   decoration: const InputDecoration(
-                    labelText: 'Date',
-                  ),
+                      // border: OutlineInputBorder(),
+                      hintText: 'Tanggal Kegiatan',
+                      labelText: 'Date',
+                      contentPadding: EdgeInsets.symmetric(vertical: 15.0)),
                 ),
                 TextField(
                   controller: _deskripsiController,
@@ -78,7 +84,8 @@ class _Tolist extends State<Catatan> {
                           "deskripsi": deskription,
                           "name":
                               FirebaseAuth.instance.currentUser!.displayName,
-                          "userId": FirebaseAuth.instance.currentUser!.uid
+                          "userId": FirebaseAuth.instance.currentUser!.uid,
+                          "dateTime": DateTime.now().microsecondsSinceEpoch
                         });
                       }
 
@@ -91,7 +98,6 @@ class _Tolist extends State<Catatan> {
                           // "userId": FirebaseAuth.instance.currentUser!.uid
                         });
                       }
-
                       // Clear the text fields
                       _titleController.text = '';
                       _deskripsiController.text = '';
@@ -123,10 +129,11 @@ class _Tolist extends State<Catatan> {
       appBar: AppBar(
         title: const Text('Catatan'),
         backgroundColor: Colors.blue[900],
-        leading: IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.list_alt_rounded),
-        ),
+        // leading: IconButton(
+        //   onPressed: () {},
+        //   icon: Icon(Icons.list_alt_rounded),
+        // ),
+        leading: Icon(Icons.list),
         actions: [
           IconButton(
             onPressed: () async {

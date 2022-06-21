@@ -117,7 +117,8 @@ class _Home extends State<Home> {
               child: TextField(
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      hintText: 'Enter City Name'),
+                      labelText: 'Nama Kota',
+                      hintText: 'Masukan Nama Kota'),
                   keyboardType: TextInputType.text,
                   onChanged: _saveLat,
                   onSubmitted: _saveLat)),
@@ -214,7 +215,7 @@ class _Home extends State<Home> {
             child: Column(children: [_cityName(), _buttons()]),
           ),
           Text(
-            "Output : ",
+            "Hasil = ",
             style: TextStyle(fontSize: 18),
           ),
           Divider(

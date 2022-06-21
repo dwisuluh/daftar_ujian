@@ -14,6 +14,8 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // Konfigurasi Routing Halamana awal
+    // aplikasi dijalankan maka akan langsung melakukan routing awal menuji file login
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: 'login',

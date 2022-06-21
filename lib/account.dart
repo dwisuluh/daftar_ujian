@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'editAccount.dart';
 
 //class ketika tombol jadwal di klik
 class Akun extends StatefulWidget {
@@ -45,6 +46,15 @@ class _AkunState extends State<Akun> {
             const Text('saat ini jadwal ujian anda belum ada.')
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => editAccount()),
+          );
+        },
+        child: const Icon(Icons.edit),
       ),
     );
   }
