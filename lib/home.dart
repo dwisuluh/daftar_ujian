@@ -24,8 +24,8 @@ class _Home extends State<Home> {
     ws = new WeatherFactory(key, language: Language.INDONESIAN);
   }
 
+//mengambil data ramalan
   void queryForecast() async {
-    /// Removes keyboard
     FocusScope.of(context).requestFocus(FocusNode());
     setState(() {
       _state = AppState.DOWNLOADING;
@@ -38,8 +38,8 @@ class _Home extends State<Home> {
     });
   }
 
+//Mengambil data per hari
   void queryWeather() async {
-    /// Removes keyboard
     FocusScope.of(context).requestFocus(FocusNode());
 
     setState(() {
