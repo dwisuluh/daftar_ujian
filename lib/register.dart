@@ -36,6 +36,7 @@ class _RegistrationState extends State<Register> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
           child: TextFormField(
+            keyboardType: TextInputType.emailAddress,
             controller: _email,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
@@ -44,7 +45,7 @@ class _RegistrationState extends State<Register> {
             ),
             validator: (value) {
               if (value!.isEmpty) {
-                return 'Enter your emaul address to continue...';
+                return 'Enter your email address to continue...';
               }
               return null;
             },
