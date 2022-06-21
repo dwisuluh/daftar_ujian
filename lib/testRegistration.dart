@@ -4,12 +4,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-class DaftarUjian extends StatelessWidget {
+class DaftarUjian extends StatefulWidget {
+  @override
+  _DaftarUjian createState() => _DaftarUjian();
+}
+
+class _DaftarUjian extends State<DaftarUjian> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  String dropValue = 'Informatika';
+  String dropValue = 'Program Studi';
 
   var items = [
+    'Program Studi',
     'Informatika',
     'Sistem Informasi',
     'Sistem Informasi Akuntansi',
@@ -126,7 +132,11 @@ class DaftarUjian extends StatelessWidget {
                               child: Text(items),
                             );
                           }).toList(),
-                          onChanged: (String? value) {}),
+                          onChanged: (String? value) {
+                            setState(() {
+                              dropValue = value!;
+                            });
+                          }),
                     ],
                   ),
                 ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class editAccount extends StatefulWidget {
   @override
@@ -9,9 +11,21 @@ class editAccount extends StatefulWidget {
 class _editAccount extends State<editAccount> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  String dropValue = 'Informatika';
+  String dropValue = 'Program Studi';
+
+  final TextEditingController _namaController = TextEditingController();
+  final TextEditingController _nimController = TextEditingController();
+  String? _prodiController;
+  final TextEditingController _ttlController = TextEditingController();
+  final TextEditingController _tanggalController = TextEditingController();
+  final TextEditingController _alamatController = TextEditingController();
+  final String uid = FirebaseAuth.instance.currentUser!.uid;
+
+  final CollectionReference _documentation =
+      FirebaseFirestore.instance.collection('biodata');
 
   var items = [
+    'Program Studi',
     'Informatika',
     'Sistem Informasi',
     'Sistem Informasi Akuntansi',
@@ -24,7 +38,7 @@ class _editAccount extends State<editAccount> {
     FormState? form = this.formKey.currentState;
 
     SnackBar message = SnackBar(
-      content: Text('Proses validasi sukses...'),
+      content: Text('Proses simpan data berhasil'),
     );
 
     if (form != null) {
@@ -41,34 +55,38 @@ class _editAccount extends State<editAccount> {
           title: Text('Update Biodata'),
           backgroundColor: Colors.blue[900],
         ),
-        // drawer: buildDrawer(context),
+        // Membuat Form Field update biodata
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(15.0),
           child: Form(
             key: formKey,
             child: Column(
               children: <Widget>[
-                // padding: const EdgeInsets.only(bottom: 5.0),
-                TextFormField(
-                  scrollPadding: EdgeInsets.symmetric(horizontal: 5.0),
-                  autofocus: true,
-                  decoration: InputDecoration(
-                    hintText: 'Masukkan nama',
-                    labelText: 'Nama',
-                    icon: Icon(Icons.person),
-                    border: OutlineInputBorder(),
-                  ),
-                  keyboardType: TextInputType.text,
-                  validator: (String? value) {
-                    if (value.toString().isEmpty) {
-                      return 'Nama tidak boleh kosong';
-                    }
-                  },
-                ),
-
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0),
+                Container(
+                  margin: EdgeInsets.all(5.0),
                   child: TextFormField(
+                    controller: _namaController,
+                    maxLines: 1,
+                    scrollPadding: EdgeInsets.symmetric(horizontal: 5.0),
+                    autofocus: true,
+                    decoration: InputDecoration(
+                      hintText: 'Masukkan nama',
+                      labelText: 'Nama',
+                      icon: Icon(Icons.person),
+                      border: OutlineInputBorder(),
+                    ),
+                    keyboardType: TextInputType.text,
+                    validator: (String? value) {
+                      if (value.toString().isEmpty) {
+                        return 'Nama tidak boleh kosong';
+                      }
+                    },
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.all(5.0),
+                  child: TextFormField(
+                    controller: _nimController,
                     decoration: InputDecoration(
                       hintText: 'Masukkan NIM',
                       labelText: 'NIM',
@@ -83,48 +101,74 @@ class _editAccount extends State<editAccount> {
                     },
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0),
+                Container(
+                  margin: EdgeInsets.all(5.0),
+                  child: Column(
+                    children: [
+                      DropdownButton<String>(
+                        value: dropValue,
+                        icon: const Icon(Icons.school),
+                        items: items.map((String items) {
+                          return DropdownMenuItem(
+                            value: items,
+                            child: Text(items),
+                          );
+                        }).toList(),
+                        onChanged: (String? value) {
+                          setState(() {
+                            dropValue = value!;
+                            _prodiController = dropValue;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.all(5.0),
                   child: TextFormField(
+                    controller: _ttlController,
                     decoration: InputDecoration(
-                      hintText: 'Masukkan Email',
-                      labelText: 'Email:',
-                      icon: Icon(Icons.email),
+                      hintText: 'Tempat Lahir',
+                      labelText: 'Tempat Lahir',
+                      icon: Icon(Icons.house),
                       border: OutlineInputBorder(),
                     ),
-                    keyboardType: TextInputType.emailAddress,
+                    keyboardType: TextInputType.text,
                     validator: (String? value) {
                       if (value.toString().isEmpty) {
-                        return 'Email tidak boleh kosong';
+                        return 'Tempat Lahir Tidak Boleh Kosong';
                       }
                     },
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0),
-                  child: Column(
-                    children: [
-                      DropdownButton(
-                          value: dropValue,
-                          icon: const Icon(Icons.school),
-                          items: items.map((String items) {
-                            return DropdownMenuItem(
-                              value: items,
-                              child: Text(items),
-                            );
-                          }).toList(),
-                          onChanged: (String? value) {}),
-                    ],
+                Container(
+                  margin: EdgeInsets.all(5.0),
+                  child: TextFormField(
+                    controller: _tanggalController,
+                    decoration: InputDecoration(
+                      hintText: 'DD/MM/YYYY',
+                      labelText: 'Tanggal Lahir',
+                      icon: Icon(Icons.calendar_month_outlined),
+                      border: OutlineInputBorder(),
+                    ),
+                    keyboardType: TextInputType.datetime,
+                    validator: (String? value) {
+                      if (value.toString().isEmpty) {
+                        return 'Tanggal Lahir Tidak Boleh Kosong';
+                      }
+                    },
                   ),
                 ),
-                // ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0),
+                Container(
+                  // height: 45,
+                  margin: EdgeInsets.all(5.0),
                   child: TextFormField(
+                    controller: _alamatController,
                     decoration: InputDecoration(
-                      hintText: 'Masukan Judul Tugas Akhir',
-                      labelText: 'Judul Tugas Akhir',
-                      icon: Icon(Icons.title),
+                      hintText: 'Alamat Lengkap',
+                      labelText: 'Alamat',
+                      icon: Icon(Icons.add_home_outlined),
                       border: OutlineInputBorder(),
                     ),
                     keyboardType: TextInputType.text,
@@ -138,12 +182,19 @@ class _editAccount extends State<editAccount> {
                 ),
                 Container(height: 10.0),
                 ElevatedButton(
-                  child: Text('Validasi Data'),
+                  child: Text('Simpan'),
                   onPressed: validateInput,
                 )
               ],
             ),
           ),
         ));
+  }
+
+  Future<void> _update([DocumentSnapshot? documentSnapshot]) async {
+    String action = 'create';
+    if (documentSnapshot != null) {
+      action = 'update';
+    }
   }
 }

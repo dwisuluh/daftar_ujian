@@ -31,47 +31,9 @@ class _AkunState extends State<Akun> {
           ),
         ],
       ),
-      // body: Card(
-      //   child: Column(
-      //     mainAxisSize: MainAxisSize.min,
-      //     children: <Widget>[
-      //       const ListTile(
-      //         leading:
-      //             Image(image: AssetImage('asset/images/student-icon.jpeg')),
-      //         title: Text('Dwi Suluh Pribadi'),
-      //         subtitle: Text('195411132'),
-      //       ),
-      //       // const Text('saat ini jadwal ujian anda belum ada.')
-      //       Expanded(
-      //         child: Row(
-      //           children: <Widget>[
-      //             ListTile(
-      //               title: Text('Informatika'),
-      //             )
-      //           ],
-      //         ),
-      //       )
-      //     ],
-      //   ),
-      // ),
       body: Center(
         child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
           Row(children: <Widget>[
-            // Expanded(
-            //     child: Card(
-            //   child: ListTile(
-            //     leading:
-            //         Image(image: AssetImage('asset/images/student-icon.jpeg')),
-            //   ),
-            // )),
-            // Expanded(
-            //   //   child: ListTile(
-            //   // leading:
-            //   //     Image(image: AssetImage('asset/images/student-icon.jpeg')),
-            //   // title: Text('Dwi Suluh Pribadi'),
-            //   // subtitle: Text('195411132'),
-            //   child: Card(child: Text('Dwi Suluh Pribadi')),
-            // ),
             Container(
                 padding: EdgeInsets.all(5.0),
                 child: Card(

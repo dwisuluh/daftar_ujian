@@ -32,7 +32,7 @@ class _Tolist extends State<Catatan> {
       _deskripsiController.text = documentSnapshot['deskripsi'];
       _dateController.text = documentSnapshot['date'];
     }
-//Menampilkan Modal untuk entri catatan
+    //Menampilkan Modal untuk entri catatan
     await showModalBottomSheet(
         isScrollControlled: true,
         context: context,
